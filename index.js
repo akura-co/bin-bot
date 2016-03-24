@@ -30,7 +30,7 @@ module.exports = function () {
         return true
       })
       if (r)
-        text = JSON.stringify(r)
+        text = _.values(_.pick(r, ['scheme', 'type', 'country'])).join(' ')
       res.json({method: 'sendMessage', chat_id: req.body.message.chat.id, text: text})
       return
     }
