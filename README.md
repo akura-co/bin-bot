@@ -1,2 +1,1 @@
-# bin-bot
-Telegram bot to search BIN database
+Telegram bot to search BIN database https://telegram.me/BinCheckBot
