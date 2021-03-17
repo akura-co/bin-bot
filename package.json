@@ -1,7 +1,7 @@
 {
   "name": "bin-bot",
   "version": "1.0.0",
-  "description": "Telegram bot to search BIN database",
+  "description": "Telegram bot to search BIN database @BinCheckBot",
   "repository": {
     "type": "git",
     "url": "https://github.com/akura-co/bin-bot.git"
