@@ -1,26 +1,17 @@
-var
-  _ = require('underscore'),
-  superagent = require('superagent'),
-  config = require('solid-config'),
-  csv = require('fast-csv')
+var _ = require('underscore')
+var csv = require('fast-csv')
+var config = require(__dirname + '/../.' + require('./package').name)
 
-var range = []
-
-csv.fromPath('/home/ubuntu/binlistData/ranges.csv', {headers: true}).on('data', function (d) {range.push(d)})
-
-module.exports = function () {
-  var url = 'https://akura.co/telegram/' + require('./package').name + '/hook'
-  console.log(url)
-  superagent.get(config.url + config.token + '/setWebhook').query({url: url}).end(function (err) {
-    if (err)
-      console.log(err)
-  })
-  return function (req, res) {
+module.exports = () => {
+  var range = []
+  csv.parseFile(__dirname + '/../binlistData/ranges.csv', {headers: true, ignoreEmpty: true, discardUnmappedColumns: true}).
+    on('data', d => range.push(d))
+  return (req, res) => {
     console.log(req.body)
     if (req.body.message) {
       var text = 'Not found'
       var n = +req.body.message.text
-      var r = _.find(range, function (range) {
+      var r = _.find(range, range => {
         if (n < +range.iin_start)
           return
         if (+range.iin_end && (n > +range.iin_end))
@@ -31,8 +22,7 @@ module.exports = function () {
       })
       if (r)
         text = _.values(_.pick(r, ['scheme', 'type', 'country'])).join(' ')
-      res.json({method: 'sendMessage', chat_id: req.body.message.chat.id, text: text})
-      return
+      return res.json({method: 'sendMessage', chat_id: req.body.message.chat.id, text: text})
     }
     res.end()
   }

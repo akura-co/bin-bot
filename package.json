@@ -2,9 +2,6 @@
   "name": "bin-bot",
   "version": "1.0.0",
   "description": "Telegram bot to search BIN database",
-  "scripts": {
-    "test": "node test"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/akura-co/bin-bot.git"
@@ -15,13 +12,8 @@
     "url": "https://github.com/akura-co/bin-bot/issues"
   },
   "homepage": "https://github.com/akura-co/bin-bot",
-  "bin-bot": {
-    "url": "https://api.telegram.org/bot"
-  },
   "dependencies": {
-    "fast-csv": "1.0.0",
-    "solid-config": "1.3.0",
-    "superagent": "1.7.2",
-    "underscore": "1.8.3"
+    "fast-csv": "3.7.0",
+    "underscore": "1.12.1"
   }
 }
